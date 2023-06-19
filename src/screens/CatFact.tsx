@@ -1,16 +1,34 @@
+import { useEffect, useState } from "react";
 import { ArrowRight, Heart } from 'react-feather'
-import { backendApi } from '../config/vars';
+// import { backendApi } from '../config/vars';
+import Loader from "./../components/Loader"
+
+interface CatFactRecord {
+  id: String,
+  fact: String,
+}
 
 const CatFact = () => {
-  const handleGenerateCatFact = () => {
-    console.log("Generating a new cat fact");
+  
+  const [catFact, setCatFact] = useState<String>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleGenerateCatFact = async () => {
+    const apiCall = "https://catfact.ninja/fact";
+    setIsLoading(true)
+    const newCatFactRaw = await fetch(apiCall);
+    const newCatFact = (await newCatFactRaw.json() as CatFactRecord).fact
+    setIsLoading(false);
+    setCatFact(newCatFact);
   }
   
-  const handleFavoriteCatFact = () => {
-    console.log("New Favorite cat fact");
+  const handleFavoriteCatFact = async () => {
   }
 
-  console.log(backendApi.generateCatFact);
+  useEffect( () => {
+    handleGenerateCatFact();
+  }, [])
+
 
   return (
     <section className="flex flex-col justify-between mx-auto max-w-[600px] min-h-[280px] h-80 rounded-lg border-2 px-12 py-6">
@@ -19,10 +37,12 @@ const CatFact = () => {
       </article>
 
       <article className="text-center px-4 relative">
-        <blockquote className="p-4">
-          Cats can be really intelligent (but not very usually) but sometimes can be very bad behaviored
-          because they are the child of the devil
-        </blockquote>
+        { isLoading ? 
+          <Loader /> :
+          <blockquote className="p-5">
+            { catFact }
+          </blockquote>
+        }
       </article>
       
       <article className="flex flex-row justify-between">
