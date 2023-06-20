@@ -29,10 +29,10 @@ const Root = () => {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      navigate("/cat-facts")
+      navigate("/cat-facts");
     }
-    if (user.token && user.username) {
-      navigate("/login")
+    if (!user.token && !user.username) {
+      navigate("/login");
     }
   });
   

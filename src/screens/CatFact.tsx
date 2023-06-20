@@ -1,28 +1,41 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Heart } from 'react-feather'
 // import { backendApi } from '../config/vars';
+import { apiGenerateCatFact, apiAddFavorite, apiDeleteFavorite } from "./../api"
+import { useUserStore } from "../store/userStore";
 import Loader from "./../components/Loader"
-
-interface CatFactRecord {
-  id: String,
-  fact: String,
-}
+import { CatFactResponse, FavoriteCatFact } from "../interfaces";
 
 const CatFact = () => {
   
-  const [catFact, setCatFact] = useState<String>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [catFact, setCatFact] = useState<CatFactResponse | null>();
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+  const [favoriteCatFact, setFavoriteCatFact] = useState<FavoriteCatFact | null>();
+  const userStore = useUserStore();
 
   const handleGenerateCatFact = async () => {
-    const apiCall = "https://catfact.ninja/fact";
-    setIsLoading(true)
-    const newCatFactRaw = await fetch(apiCall);
-    const newCatFact = (await newCatFactRaw.json() as CatFactRecord).fact
-    setIsLoading(false);
+    setIsLoading(true);
+    const newCatFact = await apiGenerateCatFact(userStore.user.token!);
+    if (newCatFact?.is_favorite) {
+      setFavoriteCatFact({ id: newCatFact.id, status: true });
+    } else {
+      setFavoriteCatFact(null);
+    }
+    console.log(newCatFact);
     setCatFact(newCatFact);
+    setIsLoading(false);
   }
   
   const handleFavoriteCatFact = async () => {
+    if (favoriteCatFact && favoriteCatFact.status) {
+      const deleteResponse = await apiDeleteFavorite(favoriteCatFact?.id!, catFact?.id!, userStore.user.token!);
+      if (deleteResponse) {
+        setFavoriteCatFact(null);
+      }
+    } else {
+      const favoriteResponse = await apiAddFavorite(catFact?.id!, userStore.user.token!);
+      setFavoriteCatFact(favoriteResponse);
+    }
   }
 
   useEffect( () => {
@@ -40,19 +53,21 @@ const CatFact = () => {
         { isLoading ? 
           <Loader /> :
           <blockquote className="p-5">
-            { catFact }
+            { catFact?.fact || <div> There was an error </div> }
           </blockquote>
         }
       </article>
       
       <article className="flex flex-row justify-between">
-        <div className="grid place-content-center px-4 py-2 border-2 rounded border-gray-300" role="button"
+        <div role="button"
+          className={`grid place-content-center px-4 py-2 border-2 rounded border-gray-300 ${favoriteCatFact?.status ? "bg-rose-600 text-white" : {}}`}
           onClick={handleFavoriteCatFact}>
           <div>
             <Heart />
           </div> 
         </div>
-        <div className="grid place-content-center px-4 py-2 border-2 rounded border-gray-300" role="button"
+        <div role="button"
+          className="grid place-content-center px-4 py-2 border-2 rounded border-gray-300" 
           onClick={handleGenerateCatFact}>
           <div>
             <ArrowRight />

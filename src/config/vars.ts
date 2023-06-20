@@ -1,25 +1,27 @@
 interface BackendApi {
-  rootPath: String,
-  login: String,
-  logout: String,
-  signIn: String,
-  generateCatFact: String,
-  userFavorites: String,
-  communityFavorites: String,
-  addToFavorite: String,
+  rootPath: URL,
+  login: URL,
+  logout: URL,
+  signIn: URL,
+  generateCatFact: URL,
+  userFavorites: URL,
+  communityFavorites: URL,
+  addToFavorite: URL,
+  deleteFavorite: (favoriteCatFact: Number) => URL,
 }
 
 const rootPath = import.meta.env.VITE_BACK_API || 'http://localhost:3001/api/v1';
 
 const backendApi: BackendApi = {
-  rootPath: rootPath,
-  login: `${rootPath}/login`,
-  logout: `${rootPath}/signout`,
-  signIn: `${rootPath}/signin`,
-  generateCatFact: `${rootPath}/cat_facts`,
-  userFavorites: `${rootPath}/users/user_favorites`,
-  communityFavorites: `${rootPath}/cat_facts/favorites`,
-  addToFavorite: `${rootPath}/favorite_cat_facts`,
+  rootPath: new URL(rootPath),
+  login: new URL(`${rootPath}/login`),
+  logout: new URL(`${rootPath}/signout`),
+  signIn: new URL(`${rootPath}/signin`),
+  generateCatFact: new URL(`${rootPath}/cat_facts`),
+  userFavorites: new URL(`${rootPath}/users/user_favorites`),
+  communityFavorites: new URL(`${rootPath}/cat_facts/favorites`),
+  addToFavorite: new URL(`${rootPath}/favorite_cat_facts`),
+  deleteFavorite: (id) => new URL(`${rootPath}/favorite_cat_facts/${id}`),
 }
 
 export { backendApi }
