@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { apiLogin } from "./../api";
 import { useUserStore } from "../store/userStore";
@@ -24,6 +24,12 @@ const Login = () => {
       setError('Invalid user name')
     }
   }
+
+  useEffect(() => {
+    if (userStore.user.token) {
+      navigate("/cat-facts")
+    }
+  }, [])
   
   return (
     <main className="w-full min-h-screen grid">

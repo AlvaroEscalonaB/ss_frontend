@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useUserStore } from "./store/userStore";
+import { deleteLocalStorage } from "./helpers/localstorage";
 
 interface NavbarRoute {
   route: String,

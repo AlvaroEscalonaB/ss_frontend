@@ -16,7 +16,6 @@ const UserFavorites = () => {
     const fetchUserFavorites = async () => {
       setIsLoading(true);
       const rawUserFavoritesData = await apiUserFavorites(userStore.user.token!);
-      console.log(rawUserFavoritesData);
       if (rawUserFavoritesData) {
         setData(rawUserFavoritesData);
       }

@@ -1,14 +1,10 @@
 
 import { create } from 'zustand'
+import { deleteLocalStorage, getFromLocalStorage, setLocalStorage } from '../helpers/localstorage'
 
 export interface User {
   username: String | null,
   token: String | null,
-}
-
-const initialUser: User = {
-  username: null,
-  token: null,
 }
 
 interface UserStore {
@@ -17,10 +13,32 @@ interface UserStore {
   logoutUser: () => void,
 }
 
+const nullUser = {
+  username: null,
+  token: null,
+}
+
+const initialUser = (
+  () => {
+    const savedUser = getFromLocalStorage()
+    if (savedUser) {
+      return savedUser
+    } else {
+      return nullUser;
+    }
+  }
+)();
+
 const useUserStore = create<UserStore>((set) => ({
   user: initialUser,
-  setUser: (userData: User) => set(() => ({ user: userData })),
-  logoutUser: () => set(() => ({ user: initialUser })),
+  setUser: (userData: User) => set(() => {
+    setLocalStorage(userData);
+    return { user: userData }
+  }),
+  logoutUser: () => set(() => {
+    deleteLocalStorage();
+    return { user: nullUser }
+  }),
 }))
 
 export { useUserStore }
