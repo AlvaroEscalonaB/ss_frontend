@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Root from "./Root";
-import Error from "./screens/Error";
+import ErrorNotFound from "./screens/ErrorNotFound";
 import UserFavorites from "./screens/UserFavorites";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <Error />,
+    errorElement: <ErrorNotFound />,
     children: [
       {
         path: "user-favorites",
@@ -31,12 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    errorElement: <Error />,
   },
   {
     path: "/sign-up",
     element: <SignUp />,
-    errorElement: <Error />,
   },
 ]);
 
