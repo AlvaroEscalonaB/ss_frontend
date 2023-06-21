@@ -47,7 +47,7 @@ const Root = () => {
           </div>
         ))}
       </nav>
-      <section className="p-10 flex-1 flex content-center items-center mb-20">
+      <section className="p-10 flex-1">
         <Outlet />
       </section> 
     </main>

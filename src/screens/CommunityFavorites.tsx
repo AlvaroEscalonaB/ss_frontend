@@ -24,14 +24,14 @@ const CommunityFavorites = () => {
   }, [])
 
   return (
-    <div className="pt-10 mx-auto min-w-[300px] max-w-[900px] sm:min-w-[700px]">
+    <div className="pt-4 mx-auto min-w-[300px] max-w-[900px] sm:min-w-[700px]">
       { isLoading ?
         <Loader /> :
-        <table className="shadow-lg border border-teal-700 w-full">
+        <table className="shadow-lg border border-teal-700 w-full rounded-md overflow-hidden">
           <thead>
             <tr>
-              <th className="text-start bg-teal-800 text-white px-4 py-1"> CatFact </th>
-              <th className="flex bg-teal-800 justify-center px-2 py-1">
+              <th className="text-start bg-teal-800 text-white px-4 py-2"> CatFact </th>
+              <th className="flex bg-teal-800 justify-center px-2 py-2">
                 <div>
                   <Heart color="white" />
                 </div>
@@ -41,7 +41,7 @@ const CommunityFavorites = () => {
           <tbody>
             { communityCatFacts.map( ({ id, fact, count }) => 
               <tr className="hover:bg-gray-200" key={id.toString()}>
-                <td className="px-5 p-y text-ellipsis"> { fact } </td>
+                <td className="px-5 py-2 max-w-md truncate"> { fact } </td>
                 <td className="text-center"> { count.toString() } </td>
               </tr>
             ) }

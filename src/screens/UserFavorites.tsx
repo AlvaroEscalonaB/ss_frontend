@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Heart } from 'react-feather';
+import FavoriteToogle from "../components/FavoriteToogle";
 import Loader from "../components/Loader";
 import { apiUserFavorites } from "../api";
 import { useUserStore } from "../store/userStore";
@@ -15,6 +16,7 @@ const UserFavorites = () => {
     const fetchUserFavorites = async () => {
       setIsLoading(true);
       const rawUserFavoritesData = await apiUserFavorites(userStore.user.token!);
+      console.log(rawUserFavoritesData);
       if (rawUserFavoritesData) {
         setData(rawUserFavoritesData);
       }
@@ -24,14 +26,14 @@ const UserFavorites = () => {
   }, [])
 
   return (
-    <div className="pt-10 mx-auto max-w-[900px] min-w-[700px]">
+    <div className="pt-4 mx-auto max-w-[900px] min-w-[700px]">
       { isLoading ?
         <Loader /> :
-        <table className="shadow-lg border border-teal-700 w-full">
+        <table className="shadow-lg border-2 border-teal-700 w-full rounded-md overflow-hidden">
           <thead>
             <tr>
-              <th className="text-start bg-teal-800 text-white px-4 py-1"> Cat Fact </th>
-              <th className="flex bg-teal-800 justify-center px-2 py-1">
+              <th className="text-start bg-teal-800 text-white px-4 py-2"> Cat Fact </th>
+              <th className="flex bg-teal-800 justify-center px-4 py-2">
                 <div>
                   <Heart color="white" />
                 </div>
@@ -41,8 +43,10 @@ const UserFavorites = () => {
           <tbody>
             { data.map( ({ id, fact }) => 
               <tr className="hover:bg-gray-200" key={ id.toString() }>
-                <td className="text-center"> { id.toString() } </td>
-                <td className="px-5 p-y text-ellipsis"> { fact } </td>
+                <td className="px-5 py-2 max-w-md truncate"> { fact } </td>
+                <td className="border-l-teal-800 text-center">
+                  {/* <FavoriteToogle idFavoriteCatFact={id} /> */}
+                </td>
               </tr>
             ) }
           </tbody>
