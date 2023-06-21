@@ -37,7 +37,7 @@ const UserFavorites = () => {
         </thead>
         <tbody>
           { data.map( ({ id, fact }) => 
-            <tr className="hover:bg-gray-200">
+            <tr className="hover:bg-gray-200" key={ id.toString() }>
               <td className="text-center"> { id.toString() } </td>
               <td className="px-5 p-y text-ellipsis"> { fact } </td>
             </tr>

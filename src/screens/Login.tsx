@@ -16,10 +16,8 @@ const Login = () => {
   }
 
   const handleSubmit = async () => {
-    console.log(username);
     const loginResponse = await apiLogin(username);
     if (loginResponse) {
-      console.log("Logged user");
       userStore.setUser(loginResponse);
       navigate("/cat-facts");
     } else {
@@ -31,7 +29,7 @@ const Login = () => {
     <main className="w-full min-h-screen grid">
       <section className="flex flex-col gap-8 w-96 px-6 py-6 border-2 rounded-md border-teal-700 place-self-center">
         <article className="text-center mb-4 font-semibold text-xl text-gray-700">
-          CatFacts App!
+          Welcome again Cat Lover!
         </article>
         <article className="flex flex-col">
           <div className="w-full">
@@ -53,8 +51,8 @@ const Login = () => {
           </div>
           <div>
             <span className="text-sm text-gray-600"> Don't have an account?
-              <Link to="/sign-in" className="px-1 font-semibold hover:underline hover:underline-offset-1 hover:text-teal-700 duration-200">
-                Sign in
+              <Link to="/sign-up" className="px-1 font-semibold hover:underline hover:underline-offset-1 hover:text-teal-700 duration-200">
+                Sign Up
               </Link>
             </span> 
           </div>

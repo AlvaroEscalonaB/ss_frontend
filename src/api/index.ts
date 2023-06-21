@@ -23,7 +23,7 @@ const apiAuth = async (name: String, action: URL): Promise<User | null> => {
 
 const apiLogin = async (name: String) => apiAuth(name, backendApi.login);
 
-const apiSignUp = async (name: String) => apiAuth(name, backendApi.signIn);
+const apiSignUp = async (name: String) => apiAuth(name, backendApi.signUp);
 
 const apiUserFavorites = async (token: String): Promise<CatFact[] | null> =>  {
   // const userData = useUserStore().user;

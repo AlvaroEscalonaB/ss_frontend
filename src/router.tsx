@@ -4,7 +4,7 @@ import Root from "./Root";
 import Error from "./screens/Error";
 import UserFavorites from "./screens/UserFavorites";
 import Login from "./screens/Login";
-import SignIn from "./screens/SignIn";
+import SignUp from "./screens/SignUp";
 import CommunityFavorites from "./screens/CommunityFavorites";
 import CatFact from "./screens/CatFact";
 
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/sign-in",
-    element: <SignIn />,
+    path: "/sign-up",
+    element: <SignUp />,
     errorElement: <Error />,
   },
 ]);
