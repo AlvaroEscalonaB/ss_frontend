@@ -25,3 +25,4 @@ VITE_BACK_API="http://localhost:3000/api/v1"
 - Use of react-query to save a caché and revalidation of requests
 - Give more feedback to the user in case of an error on the response
 - On sign up send a token email or a robust/safe alternative
+- Create custom hooks to avoid repetition of certain operations, for example the common set of the token of requests, or the loading, error (this can be done with react-query library also).

@@ -7,10 +7,14 @@ const SignIn = () => {
   const [username, setUsername] = useState<string | null>();
   const [validationError, setValidationError] = useState<string | null>();
   const [signUpError, setSignUpError] = useState<string | null>();
+  // const inputButtonRef = useRef<HTMLButtonElement>();
   const navigate = useNavigate();
   const userStore = useUserStore();
 
   const handleUsernameValidation = (e: any) => {
+    if (signUpError) {
+      setSignUpError(null);
+    }
     const usernameCandidate = e.target.value as String;
     if (usernameCandidate.length < 3) {
       setValidationError('Name should have at least 3 characters');
@@ -21,9 +25,8 @@ const SignIn = () => {
   }
 
   const handleSignIn = async () => {
-    if (!!!validationError) {
+    if (!Boolean(validationError)) {
       const signUpResponse = await apiSignUp(username!);
-      console.log(signUpResponse);
       if (signUpResponse) {
         userStore.setUser(signUpResponse);
         navigate("/cat-facts");
@@ -45,19 +48,20 @@ const SignIn = () => {
               type="text" 
               className="w-full rounded-sm border-gray-400 focus:border-teal-700 focus:ring-0 focus:outline-none" 
               placeholder="Name"
+              autoFocus
               />
           </div>
-          <div className="min-h-[14px]">
+          <div className="min-h-[24px]">
             <span className="text-xs text-red-500"> { validationError } { signUpError } </span>
           </div>
         </article>
         <article className="flex flex-col gap-2">
           <div>
-            <button 
+            <button
               onClick={handleSignIn} 
-              className="border-2 border-teal-700 w-full rounded-sm py-1 font-semibold text-white bg-teal-700 hover:text-teal-700 hover:bg-white duration-200 "
+              className="border-2 border-teal-700 w-full rounded-sm py-1 font-semibold text-white bg-teal-700 hover:text-teal-700 hover:bg-white duration-200 focus:outline-1 focus:outline-teal-500 disabled:opacity-50"
               disabled={ Boolean(validationError) }
-            >
+              >
               Sign Up
             </button>
           </div>

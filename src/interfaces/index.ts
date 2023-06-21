@@ -1,4 +1,3 @@
-
 export interface CatFact {
   id: Number,
   fact: String,
@@ -11,7 +10,8 @@ export interface CatFactResponse {
 }
 
 export interface CatFactCount {
-  catFact: String,
+  id: String,
+  fact: String,
   count: Number,
 }
 

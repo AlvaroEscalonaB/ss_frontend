@@ -21,7 +21,6 @@ const CatFact = () => {
     } else {
       setFavoriteCatFact(null);
     }
-    console.log(newCatFact);
     setCatFact(newCatFact);
     setIsLoading(false);
   }

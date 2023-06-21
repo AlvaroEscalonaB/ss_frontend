@@ -18,7 +18,7 @@ const backendApi: BackendApi = {
   logout: new URL(`${rootPath}/signout`),
   signUp: new URL(`${rootPath}/sign-up`),
   generateCatFact: new URL(`${rootPath}/cat_facts`),
-  userFavorites: new URL(`${rootPath}/users/user_favorites`),
+  userFavorites: new URL(`${rootPath}/users/favorites`),
   communityFavorites: new URL(`${rootPath}/cat_facts/favorites`),
   addToFavorite: new URL(`${rootPath}/favorite_cat_facts`),
   deleteFavorite: (id) => new URL(`${rootPath}/favorite_cat_facts/${id}`),

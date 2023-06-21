@@ -31,7 +31,7 @@ const apiUserFavorites = async (token: String): Promise<CatFact[] | null> =>  {
     headers: {
       authorization: token as any,
     },
-    method: "POST",
+    method: "GET",
   });
 
   if (rawDataResponse.ok) {
@@ -46,7 +46,7 @@ const apiCommunityFavorites = async (token: String): Promise<CatFactCount[] | nu
     headers: {
       authorization: token as any
     },
-    method: "POST",
+    method: "GET",
   });
   if (rawDataResponse.ok) {
     const dataResponse: CatFactCount[] = await rawDataResponse.json();
