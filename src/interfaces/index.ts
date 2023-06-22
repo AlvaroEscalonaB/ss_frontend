@@ -19,3 +19,9 @@ export interface FavoriteCatFact {
   id: Number,
   status: Boolean,
 }
+
+export interface UserFavoriteCatFact {
+  id: Number,
+  cat_fact_id: Number,
+  fact: String,
+}

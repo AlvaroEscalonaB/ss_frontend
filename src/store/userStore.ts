@@ -3,7 +3,7 @@ import { create } from 'zustand'
 import { deleteLocalStorage, getFromLocalStorage, setLocalStorage } from '../helpers/localstorage'
 
 export interface User {
-  username: String | null,
+  name: String | null,
   token: String | null,
 }
 
@@ -14,7 +14,7 @@ interface UserStore {
 }
 
 const nullUser = {
-  username: null,
+  name: null,
   token: null,
 }
 

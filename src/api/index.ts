@@ -1,6 +1,6 @@
 import { backendApi } from "./../config/vars";
 import type { User } from "../store/userStore";
-import type { CatFactResponse, CatFact, CatFactCount, FavoriteCatFact } from "../interfaces";
+import type { CatFactResponse, CatFactCount, FavoriteCatFact, UserFavoriteCatFact } from "../interfaces";
 
 const apiAuth = async (name: String, action: URL): Promise<User | null> => {
   const rawLoginResponse = await fetch(action, {
@@ -25,7 +25,7 @@ const apiLogin = async (name: String) => apiAuth(name, backendApi.login);
 
 const apiSignUp = async (name: String) => apiAuth(name, backendApi.signUp);
 
-const apiUserFavorites = async (token: String): Promise<CatFact[] | null> =>  {
+const apiUserFavorites = async (token: String): Promise<UserFavoriteCatFact[] | null> =>  {
   // const userData = useUserStore().user;
   const rawDataResponse = await fetch(backendApi.userFavorites, {
     headers: {
@@ -35,7 +35,7 @@ const apiUserFavorites = async (token: String): Promise<CatFact[] | null> =>  {
   });
 
   if (rawDataResponse.ok) {
-    const dataResponse: CatFact[] = await rawDataResponse.json();
+    const dataResponse: UserFavoriteCatFact[] = await rawDataResponse.json();
     return dataResponse
   }
   return null;

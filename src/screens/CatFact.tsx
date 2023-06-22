@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Heart } from 'react-feather'
-// import { backendApi } from '../config/vars';
 import { apiGenerateCatFact, apiAddFavorite, apiDeleteFavorite } from "./../api"
 import { useUserStore } from "../store/userStore";
 import Loader from "./../components/Loader"
@@ -43,39 +42,41 @@ const CatFact = () => {
 
 
   return (
-    <div className="flex content-center items-center mb-20">
-      <section className="flex flex-col justify-between mx-auto max-w-[600px] min-h-[340px] h-80 rounded-lg border-2 px-12 py-12">
-        <article>
-          Here you can see the next catFact:
-        </article>
+    <section className="p-10 flex-1 flex justify-center items-center"> 
+      <div className="mb-20 h-full">
+        <section className="flex flex-col justify-between mx-auto min-w-full md:min-w-[600px] max-w-[700px] min-h-[340px] h-80 rounded-lg border-2 px-12 py-12">
+          <article className="text-base text-teal-600 font-semibold">
+            { `Hey ${userStore.user.name}! Do you know that:` }
+          </article>
 
-        <article className="text-center px-4 relative">
-          { isLoading ? 
-            <Loader /> :
-            <blockquote className="p-5">
-              { catFact?.fact || <div> There was an error </div> }
-            </blockquote>
-          }
-        </article>
-        
-        <article className="flex flex-row justify-between">
-          <div role="button"
-            className={`grid place-content-center px-4 py-2 border-2 rounded border-gray-300 ${favoriteCatFact?.status ? "bg-rose-600 text-white" : {}}`}
-            onClick={handleFavoriteCatFact}>
-            <div>
-              <Heart />
-            </div> 
-          </div>
-          <div role="button"
-            className="grid place-content-center px-4 py-2 border-2 rounded border-gray-300 z-10" 
-            onClick={handleGenerateCatFact}>
-            <div>
-              <ArrowRight />
+          <article className="text-center px-4 relative">
+            { isLoading ? 
+              <Loader /> :
+              <blockquote className="p-5">
+                { catFact?.fact || <div> There was an error </div> }
+              </blockquote>
+            }
+          </article>
+          
+          <article className="flex flex-row justify-between">
+            <div role="button"
+              className={`grid place-content-center px-4 py-2 border-2 rounded border-gray-300 ${favoriteCatFact?.status ? "bg-rose-600 text-white" : {}} duration-200`}
+              onClick={handleFavoriteCatFact}>
+              <div>
+                <Heart />
+              </div> 
             </div>
-          </div>
-        </article>
-      </section>
-    </div>
+            <div role="button"
+              className="grid place-content-center px-4 py-2 border-2 rounded border-gray-300 z-10" 
+              onClick={handleGenerateCatFact}>
+              <div>
+                <ArrowRight />
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
   )
 }
 
