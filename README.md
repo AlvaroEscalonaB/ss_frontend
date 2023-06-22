@@ -14,11 +14,17 @@
 VITE_BACK_API="http://localhost:3000/api/v1"
 ```
 
+6. Now your app should be ready to run with `yarn dev` or `npm run dev`
+
 ## Used packages and explanation
 
 - TailwindCSS: To give style inline to the components, also it's very handy with the TailwindCSS extension in VSCode
 - react-router-dom: To handle routes and also protected routes through the react application
-- zustand: Library that provides a store to handle data that is really easy to use that, in my opinion more that redux, redux-saga or RTK
+- zustand: Library that provides a store to handle data that is really easy to use that, in my opinion more that redux, redux-saga or RTK, also to make the app to preserve the session on page reload the localStorage is used to obtain the user data and keep logged.
+
+## Design and structure decisions
+
+-
 
 ## Improvements for future versions
 
