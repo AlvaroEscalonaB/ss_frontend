@@ -18,7 +18,7 @@ VITE_BACK_API="http://localhost:3000/api/v1"
 
 ## Used packages and explanation
 
-- TailwindCSS: To give style inline to the components, also it's very handy with the TailwindCSS extension in VSCode
+- TailwindCSS: To give style inline to the components, also it's very handy with the TailwindCSS extension in VSCode, you can add differents plugins to tailwind in this project the form plugin to clean the default styles and flowbite for tooltips
 - react-router-dom: To handle routes and also protected routes through the react application
 - zustand: Library that provides a store to handle data that is really easy to use that, in my opinion more that redux, redux-saga or RTK, also to make the app to preserve the session on page reload the localStorage is used to obtain the user data and keep logged.
 
