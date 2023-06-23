@@ -10,9 +10,7 @@ interface BackendApi {
   deleteFavorite: (favoriteCatFact: Number) => URL;
 }
 
-const rootPath =
-  import.meta.env.VITE_BACK_API || "http://localhost:3001/bad/API";
-console.log(rootPath);
+const rootPath = import.meta.env.VITE_BACK_API;
 
 const backendApi: BackendApi = {
   rootPath: new URL(rootPath),
